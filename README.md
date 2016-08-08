@@ -6,6 +6,8 @@ Example project showing use of **SYSTEM_ALERT_WINDOW** permission on Android 23+
 
 <img src="https://cloud.githubusercontent.com/assets/6524043/17489319/46c4fddc-5d52-11e6-8369-b23c59d8a0f6.png" width="400">
 
+*Note: This screenshot shows the example app drawing over the top of another running app: [motorsport-circuits](https://github.com/noln/motorsport-circuits). So don't expect a map too appear when you run the example code! You just get the green box and bugdroid.*
+
 * If any other app is running when the the app launches, they will lose focus, but *onPause* **will not be called** - the app behaves as a system alert, as the title suggests.
 
 * It's deliberately translucent and not full screen so that other apps can be seen running in the background, but you can make the app run full window by modifying the layout XML, and making the background colour opaque.
