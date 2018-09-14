@@ -48,7 +48,7 @@ public class MainService extends Service implements View.OnTouchListener {
             new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_PHONE,
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                     0,
                     PixelFormat.TRANSLUCENT);
 
