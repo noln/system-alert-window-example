@@ -12,8 +12,12 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import java.util.Locale;
+
 /**
  * Created by matt on 08/08/2016.
  */
@@ -24,7 +28,9 @@ public class MainService extends Service implements View.OnTouchListener {
 
   private WindowManager windowManager;
 
-  private View floatyView;
+  private View     floatyView;
+  private int      clickCount = 1;
+  private TextView statusTextView;
 
   @Override
   public IBinder onBind(Intent intent) {
@@ -45,12 +51,12 @@ public class MainService extends Service implements View.OnTouchListener {
   private void addOverlayView() {
 
     final WindowManager.LayoutParams params =
-            new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                    0,
-                    PixelFormat.TRANSLUCENT);
+        new WindowManager.LayoutParams(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+            0,
+            PixelFormat.TRANSLUCENT);
 
     params.gravity = Gravity.CENTER | Gravity.START;
     params.x = 0;
@@ -79,11 +85,27 @@ public class MainService extends Service implements View.OnTouchListener {
       }
     };
 
+    // Treat this as your root container, and reference child Views as you would in an activity.
     floatyView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.floating_view, interceptorLayout);
 
     floatyView.setOnTouchListener(this);
 
+    // Here you're adding a regular, vanilla click listener.
+    floatyView.findViewById(R.id.user_action_button).setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        updateClickCount();
+      }
+    });
+
+    // Here you're getting a reference to the TextView that will display the number of clicks.
+    statusTextView = floatyView.findViewById(R.id.service_status_response);
+
     windowManager.addView(floatyView, params);
+  }
+
+  private void updateClickCount() {
+    statusTextView.setText(String.format(Locale.getDefault(), "User clicked the button %d times", clickCount++));
   }
 
   @Override

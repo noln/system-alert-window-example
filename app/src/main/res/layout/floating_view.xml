@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:background="#800c8c00"
-             android:layout_width="match_parent"
-             android:layout_height="200dp">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="200dp"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:background="#800c8c00">
 
-    <ImageView
-        android:src="@drawable/ic_android_black_24dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+  <ImageView
+    android:id="@+id/image"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/user_action_button"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:src="@drawable/ic_android_black_24dp" />
 
-</FrameLayout>
+  <Button
+    android:id="@+id/user_action_button"
+    app:layout_constraintBottom_toTopOf="@id/service_status_response"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:text="Perform Action"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+  <TextView
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:id="@+id/service_status_response"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:text="- nothing yet -"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
