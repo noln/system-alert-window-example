@@ -1,6 +1,8 @@
 # system-alert-window-example
 Example project showing use of **SYSTEM_ALERT_WINDOW** permission on Android 23+, with back button interception.
 
+*!!!IMPORTANT UPDATE!!! [2019-05-08] We all SAW it coming (pun intended), but the Android team have finally given us an idea of where the out-of-app UI interaction that system-alert-window enabled is going. [Confirmed at Google IO 2019: **it's going away**](https://youtu.be/l1e1gHhci70?t=1010). Part of the flakily-recorded "Whats New In Android" talk mentions it here. I'll add the link to the full video on the new Bubbles mechanism once it's broadcast and uploaded to YouTube.*
+
 * On first launch, the app will check that it has [permission to draw over other apps](https://developer.android.com/reference/android/Manifest.permission.html), and will show the user the corresponding prompt if not.
 * Once permission is granted, opening the app starts a service that inflates a layout and adds it to the screen as an overlay.
 
