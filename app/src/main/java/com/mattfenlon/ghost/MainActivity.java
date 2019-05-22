@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  protected void onResume() {
+    super.onResume();
 
     if (Settings.canDrawOverlays(this)) {
 
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     Intent svc = new Intent(this, MainService.class);
 
+    stopService(svc);
     startService(svc);
 
     finish();
