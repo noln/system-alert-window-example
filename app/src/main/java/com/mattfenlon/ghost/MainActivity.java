@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
     finish();
   }
 
-  public final static int REQUEST_CODE = 10101;
+  private final static int REQUEST_CODE = 10101;
 
-  public void checkDrawOverlayPermission() {
+  private void checkDrawOverlayPermission() {
 
     // Checks if app already has permission to draw overlays
     if (!Settings.canDrawOverlays(this)) {
