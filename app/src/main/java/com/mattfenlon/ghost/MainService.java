@@ -90,11 +90,16 @@ public class MainService extends Service implements View.OnTouchListener {
       }
     };
 
-    floatyView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.floating_view, interceptorLayout);
+    LayoutInflater inflater = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
 
-    floatyView.setOnTouchListener(this);
-
-    windowManager.addView(floatyView, params);
+    if (inflater != null) {
+      floatyView = inflater.inflate(R.layout.floating_view, interceptorLayout);
+      floatyView.setOnTouchListener(this);
+      windowManager.addView(floatyView, params);
+    }
+    else {
+      Log.e("SAW-example", "Layout Inflater Service is null; can't inflate and display R.layout.floating_view");
+    }
   }
 
   @Override
