@@ -1,3 +1,5 @@
+22/09/2019 - There's now a [Kotlin version of this project](https://github.com/noln/system-alert-window-example-kotlin).
+
 # system-alert-window-example
 Example project showing use of **SYSTEM_ALERT_WINDOW** permission on Android 23+, with back button interception.
 
