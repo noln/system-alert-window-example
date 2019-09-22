@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
 import android.widget.FrameLayout;
+
 /**
  * Created by matt on 08/08/2016.
  */
@@ -44,13 +46,22 @@ public class MainService extends Service implements View.OnTouchListener {
 
   private void addOverlayView() {
 
-    final WindowManager.LayoutParams params =
-            new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                    0,
-                    PixelFormat.TRANSLUCENT);
+    final WindowManager.LayoutParams params;
+    int layoutParamsType;
+
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+      layoutParamsType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+    }
+    else {
+      layoutParamsType = LayoutParams.TYPE_PHONE;
+    }
+
+    params = new WindowManager.LayoutParams(
+        WindowManager.LayoutParams.MATCH_PARENT,
+        WindowManager.LayoutParams.WRAP_CONTENT,
+        layoutParamsType,
+        0,
+        PixelFormat.TRANSLUCENT);
 
     params.gravity = Gravity.CENTER | Gravity.START;
     params.x = 0;
@@ -79,11 +90,16 @@ public class MainService extends Service implements View.OnTouchListener {
       }
     };
 
-    floatyView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.floating_view, interceptorLayout);
+    LayoutInflater inflater = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
 
-    floatyView.setOnTouchListener(this);
-
-    windowManager.addView(floatyView, params);
+    if (inflater != null) {
+      floatyView = inflater.inflate(R.layout.floating_view, interceptorLayout);
+      floatyView.setOnTouchListener(this);
+      windowManager.addView(floatyView, params);
+    }
+    else {
+      Log.e("SAW-example", "Layout Inflater Service is null; can't inflate and display R.layout.floating_view");
+    }
   }
 
   @Override
@@ -101,6 +117,7 @@ public class MainService extends Service implements View.OnTouchListener {
 
   @Override
   public boolean onTouch(View view, MotionEvent motionEvent) {
+    view.performClick();
 
     Log.v(TAG, "onTouch...");
 

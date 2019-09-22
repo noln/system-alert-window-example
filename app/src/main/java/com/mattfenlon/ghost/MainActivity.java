@@ -4,7 +4,6 @@ package com.mattfenlon.ghost;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
-import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
     finish();
   }
 
-  public final static int REQUEST_CODE = 10101;
+  private final static int REQUEST_CODE = 10101;
 
-  public void checkDrawOverlayPermission() {
+  private void checkDrawOverlayPermission() {
 
     // Checks if app already has permission to draw overlays
     if (!Settings.canDrawOverlays(this)) {
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
 
     // Check if a request code is received that matches that which we provided for the overlay draw request
     if (requestCode == REQUEST_CODE) {
