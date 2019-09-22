@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
 
     // Check if a request code is received that matches that which we provided for the overlay draw request
     if (requestCode == REQUEST_CODE) {

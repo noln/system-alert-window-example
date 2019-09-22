@@ -112,6 +112,7 @@ public class MainService extends Service implements View.OnTouchListener {
 
   @Override
   public boolean onTouch(View view, MotionEvent motionEvent) {
+    view.performClick();
 
     Log.v(TAG, "onTouch...");
 
