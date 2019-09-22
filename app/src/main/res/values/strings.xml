@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ghost</string>
+  <string name="bugdroid_ghost">The Android bug-droid with a transparent background</string>
 </resources>
